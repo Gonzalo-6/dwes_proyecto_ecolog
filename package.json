@@ -1,0 +1,23 @@
+{
+  "name": "dwes_proyecto_ecolog",
+  "version": "1.0.0",
+  "description": "",
+  "main": "ecolog.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gonzalo-6/dwes_proyecto_ecolog.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Gonzalo-6/dwes_proyecto_ecolog/issues"
+  },
+  "homepage": "https://github.com/Gonzalo-6/dwes_proyecto_ecolog#readme",
+  "dependencies": {
+    "dayjs": "^1.11.19"
+  }
+}
