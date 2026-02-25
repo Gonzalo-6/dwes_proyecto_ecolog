@@ -1,0 +1,23 @@
+=========================================
+🌱 TIENDA ECO - FACTURA OFICIAL 🌱
+=========================================
+👤 Cliente: MARÍA LÓPEZ
+📧 Contacto: maria@example.com
+
+📦 Productos:
+  - 1x Cesta de Verduras Ecológicas
+  - 2x Aceite de Oliva Virgen Extra
+  - 1x Miel Cruda Orgánica
+⚠️ Embalaje especial: SÍ (Precaución: Frágil)
+
+--- Desglose ---
+Subtotal: 114.00€
+Descuento: -5.70€
+Base Imponible: 108.30€
+IVA (21%): +22.74€
+Envío: GRATIS
+-----------------------------------------
+💶 TOTAL A PAGAR: 131.04€
+=========================================
+🚚 Entrega estimada: 28/02/2026
+=========================================
