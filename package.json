@@ -19,6 +19,7 @@
   "homepage": "https://github.com/Gonzalo-6/dwes_proyecto_ecolog#readme",
   "dependencies": {
     "dayjs": "^1.11.19",
+    "express": "^5.2.1",
     "file": "^0.2.2",
     "system": "^2.0.1"
   }
