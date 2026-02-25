@@ -1,0 +1,22 @@
+=========================================
+🌱 TIENDA ECO - FACTURA OFICIAL 🌱
+=========================================
+👤 Cliente: MARÍA LÓPEZ
+📧 Contacto: maria@example.com
+
+📦 Productos:
+  - 1x Saco de Patatas 5kg
+  - 3x Mermelada de Fresa Artesanal
+⚠️ Embalaje especial: SÍ (Precaución: Frágil)
+
+--- Desglose ---
+Subtotal: 24.10€
+Descuento: -0.00€
+Base Imponible: 24.10€
+IVA (21%): +5.06€
+Envío: +5.99€
+-----------------------------------------
+💶 TOTAL A PAGAR: 35.15€
+=========================================
+🚚 Entrega estimada: 28/02/2026
+=========================================
