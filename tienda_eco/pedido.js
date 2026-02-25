@@ -1,8 +1,11 @@
+// Importar librería
 const dayjs = require("dayjs");
 
 // ===== CONSTANTES =====
 const IVA = 0.21;
-const fechaEntrega = dayjs().add(3, "day").format("YYYY/MM/DD");
+let fechaEntrega = dayjs().add(3, "day").format("YYYY/MM/DD");
+let porcentajeDescuento = 0;
+
 
 // ===== DATOS DEL CLIENTE =====
 let nombreCliente = "Juan Pérez";
@@ -11,7 +14,7 @@ let telefonoContacto = "555-1234";
 let subtotal = 110.00;
 let stockDisponible = true;
 
-// ===== PRODUCTOS =====
+// ===== PRODUCTOS PEDIDOS =====
 const productos = [
     {nombre: "Producto A", precio: 30.00, cantidad : 12},
     {nombre: "Producto B", precio: 20.00, cantidad : 21},
@@ -21,61 +24,73 @@ const productos = [
 ]
 
 // ===== NORMALIZACIÓN =====
-const clienteNormalizado = nombreCliente.toUpperCase();
-const direccionNormalizada = direccionEntrega.toUpperCase();
-const telefonoNormalizado = telefonoContacto.replace(/-/g, "");
+let clienteNormalizado = nombreCliente.toUpperCase();
+let direccionNormalizada = direccionEntrega.toUpperCase();
+let telefonoNormalizado = telefonoContacto.replace(/-/g, "");
 
-// ===== VALIDACIÓN FRÁGIL =====
-const tieneFragil = productos.some(p => p.nombre.toLowerCase().includes("frágil"));
+// ===== VALIDACIONES =====node pedidso
+let tieneFragil = productos.includes(productos => productos.nombre.toLowerCase().includes("frágil"));
 
-// ===== STOCK =====
+
+// ===== VALIDADCIÓN STOCK =====
+
 function verificarStock(productos) {
     if(!stockDisponible) {
-        console.log("❌ No hay stock disponible");
+        console.log("❌ No hay stock disponible para procesar el pedido");
         return false;
     }
     return productos.every(producto => producto.cantidad > 0);
 }
 
 // ===== DESCUENTO =====
-function obtenerDescuento(subtotal) {
-    return subtotal >= 100 ? 0.05 : 0;
+function porcentajeDescuento(subtotal) {
+    if (subtotal >= 100)
+        return porcentajeDescuento = 0.05;
+    else {
+        return porcentajeDescuento = 0;
+    }
 }
 
-// ===== TOTAL =====
-function calcularTotal(subtotal, descuentoPct) {
-    const descuento = subtotal * descuentoPct;
-    const subtotalConDescuento = subtotal - descuento;
-    const ivaCalculado = subtotalConDescuento * IVA;
-    const total = subtotalConDescuento + ivaCalculado;
+// ===== CÁLCULO TOTAL =====
 
-    return {descuento, subtotalConDescuento, ivaCalculado, total};
+function calcularTotal(subtotal, porcentajeDescuento) {
+    let descuento = subtotal * porcentajeDescuento;
+    let totalConDescuento = subtotal - descuento;
+    let totalFinal = totalConDescuento * (1 + IVA);
+    return totalFinal.toFixed(2);
+
 }
 
-// ===== PROCESAMIENTO =====
-if (verificarStock(productos)) {
 
-    const descuentoPct = obtenerDescuento(subtotal);
-    const {descuento, subtotalConDescuento, ivaCalculado, total} = calcularTotal(subtotal, descuentoPct);
+// ===== FECHA ENTREGA =====
 
-    const resumenPedido = `
+function entregarPedido(){
+    if (verificarStock(productos)) {
+        const descuentoAplicado = porcentajeDescuento(subtotal);
+        const total = calcularTotal(subtotal, descuentoAplicado);
+        console.log (`Pedido entregado a ${clienteNormalizado} en ${direccionNormalizada}. Total a pagar: ${total} €. Fecha estimada de entrega: ${fechaEntrega}`);
+    }
+}
+
+
+const resumenPedido = `
 =========================================
 🌱 TIENDA ECO - RESUMEN DEL PEDIDO 🌱
 =========================================
 👤 Cliente: ${clienteNormalizado}
-📦 Productos: ${productos.map(p => p.nombre).join(", ")}
-⚠️ ¿Contiene frágiles?: ${tieneFragil ? "Sí" : "No"}
+📦 Productos: ${productos.join(", ")}
+⚠️ ¿Contiene frágiles?: ${tieneFragil ? "Sí (Se requiere embalaje especial)" : "No"}
 
---- Facturación ---
+--- Desglose de Facturación ---
 Subtotal inicial: ${subtotal.toFixed(2)}€
-Descuento aplicado: ${(descuentoPct*100)}%
+Descuento aplicado: ${porcentajeDescuento * 100}%
 Subtotal tras descuento: ${subtotalConDescuento.toFixed(2)}€
-IVA: ${ivaCalculado.toFixed(2)}€
+Impuestos (IVA 21%): ${(subtotalConDescuento * IVA).toFixed(2)}€
 -----------------------------------------
-💶 TOTAL: ${total.toFixed(2)}€
-🚚 Entrega: ${fechaEntrega}
+💶 TOTAL A PAGAR: ${total.toFixed(2)}€
+=========================================
+🚚 Fecha estimada de entrega: ${fechaEntrega}
 =========================================
 `;
 
-    console.log(resumenPedido);
-}
+console.log(resumenPedido);
